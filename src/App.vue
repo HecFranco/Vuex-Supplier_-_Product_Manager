@@ -1,23 +1,28 @@
 <template>
-  <div id="app" style="height:1000000px">
+  <div id="app">
+    <authentication-page></authentication-page>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
-
 import * as types from "./types/global";
+
+import AuthenticationPage from './pages/AuthenticationPage.vue';
 
 export default {
   name: "app",
+  components: {
+    'authentication-page':AuthenticationPage
+  },
   computed: {
     // todo
   },
   methods: {
     ...mapActions({
-      handleSize: types.WINDOW_DATA_UPDATE_RESIZE,
-      handleScroll: types.WINDOW_DATA_UPDATE_SCROLL,
-      handleSettings: types.SETTINGS_UPDATE_DATA,
+      handleSize: types.UPDATE_WINDOW_DATA_RESIZE,
+      handleScroll: types.UPDATE_WINDOW_DATA_SCROLL,
+      handleSettings: types.UPDATE_SETTINGS,
     })
   },
   created() {
@@ -26,11 +31,8 @@ export default {
     window.addEventListener("resize", this.handleSize);
   },
   mounted () {
-    this.$store.dispatch(types.SETTINGS_UPDATE_DATA);
+    this.$store.dispatch(types.UPDATE_SETTINGS);
   },
-  components: {
-    // todo
-  }
 };
 </script>
 

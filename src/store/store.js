@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import generalViewData from './modules/generalViewData';
-import settings from './modules/settings';
 
+import global from './modules/Global';
+import authentication from './modules/Authentication';
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     modules: {
-      generalViewData,
-      settings
+      global,
+      authentication
     }
 });
