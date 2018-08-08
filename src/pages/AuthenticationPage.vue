@@ -46,25 +46,25 @@
       <router-link
         id="m_login_signup"
         class="m-link m-link--focus m-login__account-link"
-        :to="{ name: 'signupPage', params: {auth_type: 'signIn'} }"
+        :to="{ name: 'signupPage'}"
       >
         signupPage
       </router-link>
       <router-link
         id="m_login_signup"
         class="m-link m-link--focus m-login__account-link"
-        :to="{ name: 'loginPage', params: {auth_type: 'signUn'} }"
+        :to="{ name: 'loginPage'}"
       >
         loginPage
       </router-link>   
       <router-link
         id="m_login_signup"
         class="m-link m-link--focus m-login__account-link"
-        :to="{ name: 'forgetPasswordPage', params: {auth_type: 'forgetPassword'} }"
+        :to="{ name: 'forgetPasswordPage'}"
         >
       forgetPasswordPage
       </router-link>    
-      <p>Type: {{this.$route}} - {{firstname}} - {{echo}} </p>
+      <p>Type: {{this.$route.props}} - {{type_auth}}</p>
   </div>
 </template>
 
@@ -73,36 +73,41 @@ import * as types from "../types/authentication";
 
 export default {
   name: "AuthenticationPage",
-  data(){
-    return {
-      auth_type: 'signIn'
-    }
+  // Data from father component
+  props: {
+    type_auth: String
   },
+  created() {
+    this.$store.state.authentication.auth_type = this.type_auth;
+  },
+  updated() {
+    this.$store.commit(types.MUTATE_TYPE_AUTHENTICATION, this.type_auth);
+  },  
   computed: {
     firstname: {
-      set (value) {
-        this.$store.commit(types.MUTATE_USER_FIRSTNAME, value)
+      set(value) {
+        this.$store.commit(types.MUTATE_USER_FIRSTNAME, value);
       }
     },
     lastname: {
-      set (value) {
-        this.$store.commit(types.MUTATE_USER_LASTNAME, value)
+      set(value) {
+        this.$store.commit(types.MUTATE_USER_LASTNAME, value);
       }
     },
     email: {
-      set (value) {
-        this.$store.commit(types.MUTATE_USER_EMAIL, value)
+      set(value) {
+        this.$store.commit(types.MUTATE_USER_EMAIL, value);
       }
-    },    
+    },
     password: {
-      set (value) {
-        this.$store.commit(types.MUTATE_USER_PASSWORD, value)
+      set(value) {
+        this.$store.commit(types.MUTATE_USER_PASSWORD, value);
       }
-    }, 
-    type: {
-      set (auth_type) {
-        this.$store.dispatch(types.UPDATE_TYPE_AUTHENTICATION, auth_type)   
-      }   
+    },
+    auth_type: {
+      set() {
+        this.$store.commit(types.MUTATE_TYPE_AUTHENTICATION, this.type_auth);
+      }
     }
   }
 };

@@ -12,32 +12,29 @@ const router = new Router({
     routes: [
         {
             path: '/login',
-            // path: '/:auth_type',
             name: 'loginPage',
             component: AuthenticationPage,
             meta: { Auth: false, title: 'Login'},
             props:{
-                auth_type: 'signIn'
+                type_auth: "signIn"
             }
         },
         {
             path: '/signup',
-            // path: '/:auth_type',
             name: 'signupPage',
             component: AuthenticationPage,
             meta: { Auth: false, title: 'Signup'},
             props:{
-                auth_type: 'signUp'
+                type_auth: "signUp"
             }            
         },
         {
             path: '/forget-password',
-            // path: '/:auth_type',
             name: 'forgetPasswordPage',
             component: AuthenticationPage,
             meta: { Auth: false, title: 'Forget Password'},
             props:{
-                auth_type: 'forgetPassword'
+                type_auth: "forgetPassword"
             }            
         },
     ]
