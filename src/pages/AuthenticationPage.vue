@@ -43,6 +43,28 @@
       </div>                  
     </form>
     <!--end::form -->
+      <router-link
+        id="m_login_signup"
+        class="m-link m-link--focus m-login__account-link"
+        :to="{ name: 'signupPage', params: {auth_type: 'signIn'} }"
+      >
+        signupPage
+      </router-link>
+      <router-link
+        id="m_login_signup"
+        class="m-link m-link--focus m-login__account-link"
+        :to="{ name: 'loginPage', params: {auth_type: 'signUn'} }"
+      >
+        loginPage
+      </router-link>   
+      <router-link
+        id="m_login_signup"
+        class="m-link m-link--focus m-login__account-link"
+        :to="{ name: 'forgetPasswordPage', params: {auth_type: 'forgetPassword'} }"
+        >
+      forgetPasswordPage
+      </router-link>    
+      <p>Type: {{this.$route}} - {{firstname}} - {{echo}} </p>
   </div>
 </template>
 
@@ -51,39 +73,37 @@ import * as types from "../types/authentication";
 
 export default {
   name: "AuthenticationPage",
+  data(){
+    return {
+      auth_type: 'signIn'
+    }
+  },
   computed: {
     firstname: {
-      get () {
-        return this.$store.state.USER;
-      },
       set (value) {
         this.$store.commit(types.MUTATE_USER_FIRSTNAME, value)
       }
     },
     lastname: {
-      get () {
-        return this.$store.state.USER;
-      },
       set (value) {
         this.$store.commit(types.MUTATE_USER_LASTNAME, value)
       }
     },
     email: {
-      get () {
-        return this.$store.state.USER;
-      },
       set (value) {
         this.$store.commit(types.MUTATE_USER_EMAIL, value)
       }
     },    
     password: {
-      get () {
-        return this.$store.state.USER;
-      },
       set (value) {
         this.$store.commit(types.MUTATE_USER_PASSWORD, value)
       }
-    },     
+    }, 
+    type: {
+      set (auth_type) {
+        this.$store.dispatch(types.UPDATE_TYPE_AUTHENTICATION, auth_type)   
+      }   
+    }
   }
 };
 </script>

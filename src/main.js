@@ -10,6 +10,11 @@ import VueAxios from 'vue-axios'
 import axios from 'axios';
 Vue.use(VueAxios, axios)
 /* End::Vue Axios *************************************************************************/
+/* Begin::vue-router **********************************************************************/
+import router from './router/index';
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+/* End::vue-router ************************************************************************/
 //modules and types
 // Todo
 //.modules and types
@@ -17,5 +22,6 @@ Vue.use(VueAxios, axios)
 new Vue({
   el: '#app',
   store,
+  router,  
   render: h => h(App)
 })
